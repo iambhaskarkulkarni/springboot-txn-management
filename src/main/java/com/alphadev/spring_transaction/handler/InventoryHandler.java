@@ -3,6 +3,8 @@ package com.alphadev.spring_transaction.handler;
 import com.alphadev.spring_transaction.entity.Product;
 import com.alphadev.spring_transaction.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class InventoryHandler {
@@ -13,6 +15,7 @@ public class InventoryHandler {
         this.productRepository = productRepository;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Product updateProductDetails(Product product) {
         //throe an exception to simulate transaction use case
         if(product.getPrice() > 5000) {
